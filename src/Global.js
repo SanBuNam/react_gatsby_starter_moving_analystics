@@ -22,10 +22,22 @@ const GlobalStyle = createGlobalStyle`
   }
 
   main {
-    width: 90%;
-    margin: 1rem auto;
+    width: 50%;
+    margin: 10rem auto;
     box-sizing: border-box;
     overflow-x: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    .circle-background,
+    .circle-progress {
+      fill: none;
+    }
+    .circle-progress {
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: ease 3s 0.5s;
+    }
   }
 `;
 

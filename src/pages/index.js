@@ -1,19 +1,54 @@
 import React from "react";
-import { Link } from "gatsby";
 import Layout from "../components/layout";
-import Image from "../components/image";
-import SEO from "../components/seo";
+import SemiCircularProgressBar from "../components/SemiCircularProgressBar";
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>React for Moving Analystics Test Project</h1>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
+class IndexPage extends React.Component {
+  render() {
+    const { data } = this.props;
+    const posts = data.example.data;
 
-    <Link to="/page-2/">Link to Page-2</Link>
-  </Layout>
-);
+    return (
+      <Layout>
+        {posts.map(type => {
+          const percentage = Math.round((type.value / type.max) * 100);
+          let color = "";
+          if ((percentage > 0) & (percentage < 30)) {
+            color = "#03fcba";
+          } else if ((percentage > 31) & (percentage < 70)) {
+            color = "#fcd703";
+          } else if ((percentage > 71) & (percentage <= 100)) {
+            color = "#fc3503";
+          }
+          return (
+            <div key={type.type}>
+              <SemiCircularProgressBar
+                strokeWidth="10"
+                sqSize="400"
+                percentage={percentage}
+                color={color}
+                min={type.min}
+                max={type.max}
+                type={type.type}
+              />
+            </div>
+          );
+        })}
+      </Layout>
+    );
+  }
+}
 
 export default IndexPage;
+
+export const pageQuery = graphql`
+  query {
+    example {
+      data {
+        type
+        min
+        max
+        value
+      }
+    }
+  }
+`;

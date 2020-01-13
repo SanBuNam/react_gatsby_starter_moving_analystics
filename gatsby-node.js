@@ -1,7 +1,18 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
-
-// You can delete this file if you're not using it
+const fetch = require(`node-fetch`);
+exports.sourceNodes = async ({
+  actions: { createNode },
+  createContentDigest
+}) => {
+  const result = await fetch(
+    `https://sandbox.movinganalytics.com/test/indicators`
+  );
+  const resultData = await result.json();
+  createNode({
+    id: `example-data`,
+    internal: {
+      type: `Example`,
+      contentDigest: createContentDigest(resultData)
+    },
+    data: resultData
+  });
+};

@@ -8,6 +8,17 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-styled-components`,
     {
+      resolve: `gatsby-source-graphql`,
+      options: {
+        typeName: `GitHub`,
+        fieldName: `github`,
+        url: `https://sandbox.movinganalytics.com/test/indicators`,
+        headers: {
+          Authorization: `Bearer your-github-token`
+        }
+      }
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
@@ -24,8 +35,7 @@ module.exports = {
         start_url: "/",
         background_color: "#524763",
         theme_color: "#524763",
-        display: "minimal-ui",
-        icon: "src/images/david-logo-black.png"
+        display: "minimal-ui"
       }
     }
   ]

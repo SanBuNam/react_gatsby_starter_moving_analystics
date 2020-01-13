@@ -4,14 +4,14 @@ import { useStaticQuery, graphql } from "gatsby";
 import Header from "./header";
 import GlobalStyle from "../Global";
 import styled from "styled-components";
-import { orange, elevation, fixed } from "../utilities";
+import { grainsboro, elevation, fixed } from "../utilities";
 
 const StyledFooter = styled.footer`
-  background: ${orange};
+  background: ${grainsboro};
   padding: 1.2rem 5% 0.3rem 5%;
   width: 100%;
   ${fixed()};
-  ${elevation[2]};
+  ${elevation[0]};
 `;
 
 const Layout = ({ children }) => {
